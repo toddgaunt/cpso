@@ -42,15 +42,15 @@ cpso_init(struct cpso_result *g, void *buffer, struct cpso_config const *swarm)
 		p[i].p = balloc(&buffer, sizeof(*p[i].p) * swarm->dim);
 		for (j = 0; j < swarm->dim; ++j) {
 			/* Initialize the vector randomly between the low and high */
-			p[i].x[j] = range * swarm->rngU01(swarm->seed) + swarm->b_lo;
+			p[i].x[j] = range * swarm->rng(swarm->seed) + swarm->b_lo;
 			p[i].p[j] = p[i].x[j];
-			p[i].v[j] = 2 * range * swarm->rngU01(swarm->seed) - range;
+			p[i].v[j] = 2 * range * swarm->rng(swarm->seed) - range;
 		}
 	}
 	/* Initialize the result to a random point */
 	for (j = 0; j < swarm->dim; ++j) {
 		g->x[j] = (swarm->b_hi - swarm->b_lo)
-				  * swarm->rngU01(swarm->seed)
+				  * swarm->rng(swarm->seed)
 				  + swarm->b_lo;
 	}
 }
@@ -83,8 +83,8 @@ cpso_step(struct cpso_result *g, void *buffer, struct cpso_config const *swarm)
 	for (i = 0; i < swarm->size; ++i) {
 		/* Update the particle's velocity */
 		for (j = 0; j < swarm->dim; ++j) {
-			rl = swarm->rngU01(swarm->seed);
-			rg = swarm->rngU01(swarm->seed);
+			rl = swarm->rng(swarm->seed);
+			rg = swarm->rng(swarm->seed);
 			p[i].v[j] = swarm->cv * p[i].v[j]
 			          + swarm->cl * rl * (p[i].p[j] - p[i].x[j])
 			          + swarm->cg * rg * (g->x[j] - p[i].x[j]);

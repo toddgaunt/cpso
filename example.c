@@ -63,7 +63,7 @@ main(int argc, char **argv)
     swarm.cg = 0.2;
 
     swarm.seed = &seed;
-    swarm.rngU01 = cpso_rngU01;
+    swarm.rng = cpso_rngU01;
     
     swarm.arg = NULL;
     swarm.f = distance_fitness;

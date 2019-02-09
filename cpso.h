@@ -4,6 +4,10 @@
 
 #include <stdlib.h>
 
+/* Function pointer types */
+typedef double (cpso_rng)(size_t *seed);
+typedef double (cpso_fitness)(void *arg, size_t n, double *v);
+
 struct cpso_result {
     double fx; /* Score the following vector achieved */
     double *x; /* Vector of values that minimized f */
@@ -19,11 +23,11 @@ struct cpso_config {
     double cl; /* Local best coefficient */
     double cg; /* Global best coefficient */
 
-    size_t *seed;                   /* Seed for the following rng */
-    double (*rngU01)(size_t *seed); /* Uniform rng in the range of [0, 1] */
+    size_t *seed;       /* Seed for the following rng */
+    cpso_rng *rng; /* Uniform rng in the range of [0, 1] */
 
-    void *arg;                                   /* Fitness function arg */
-    double (*f)(void *arg, size_t n, double *v); /* Fitness function */
+    void *arg;      /* Fitness function arg */
+    cpso_fitness *f; /* Fitness function */
 };
 
 /* cpso_size() -  Compute the amount of memory needed for a particle swarm.
