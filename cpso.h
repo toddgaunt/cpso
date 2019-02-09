@@ -23,10 +23,10 @@ struct cpso_config {
     double cl; /* Local best coefficient */
     double cg; /* Global best coefficient */
 
-    size_t *seed;       /* Seed for the following rng */
+    size_t *seed;  /* Seed for the following rng */
     cpso_rng *rng; /* Uniform rng in the range of [0, 1] */
 
-    void *arg;      /* Fitness function arg */
+    void *arg;       /* Fitness function arg */
     cpso_fitness *f; /* Fitness function */
 };
 
