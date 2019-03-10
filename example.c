@@ -53,7 +53,7 @@ main(int argc, char **argv)
     ry = 10000 * cpso_rngU01(&seed) - 5000;
 
     /* Set the configuration */
-    swarm.dim = 2;
+    swarm.ndim = 2;
     swarm.size = n_particle;
     swarm.b_lo = -5000;
     swarm.b_hi = 5000;
