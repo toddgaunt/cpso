@@ -14,20 +14,20 @@ struct cpso_result {
 };
 
 struct cpso_config {
-    size_t ndim;         /* Number of dimensions to explore */
-    size_t size;        /* Number of particles in the swarm */
-    double b_lo;        /* Lower bound of starting positions */
-    double b_hi;        /* Upper bound of starting positions */
+    size_t ndim;     /* Number of dimensions to explore */
+    size_t size;     /* Number of particles in the swarm */
+    double b_lo;     /* Lower bound of starting positions */
+    double b_hi;     /* Upper bound of starting positions */
 
-    double cv;          /* Previous velocity coefficient */
-    double cl;          /* Local best coefficient */
-    double cg;          /* Global best coefficient */
+    double cv;       /* Coefficient for previous velocity */
+    double cl;       /* Coefficient for local best */
+    double cg;       /* Coefficient for global best */
 
-    size_t *seed;       /* Seed for the following rng */
-    cpso_rng *rng;      /* Uniform rng in the range of [0, 1] */
+    size_t *seed;    /* Seed for the following rng */
+    cpso_rng *rng;   /* Uniform rng in the range of [0, 1] */
 
-    void *arg;          /* Fitness function arg */
-    cpso_fitness *f;    /* Fitness function */
+    void *arg;       /* Fitness function arg */
+    cpso_fitness *f; /* Fitness function */
 };
 
 /* cpso_size() -  Compute the amount of memory needed for a particle swarm.
@@ -58,9 +58,9 @@ void
 cpso_init(struct cpso_result *g, void *buffer, struct cpso_config const *swarm);
 
 /* cpso_step() - Simulate one round of particle updates in the swarm.
- * g: Used to store the resulting vector and score of the swarm
- * buffer: Memory to store simulation state for cpso_step and cspo_run.
- * swarm: The swarm configuration dictating the details of the simulation.
+ * - g: Used to store the resulting vector and score of the swarm
+ * - buffer: Memory to store simulation state for cpso_step and cspo_run.
+ * - swarm: The swarm configuration dictating the details of the simulation.
  *
  * Simulate a single step of particle updates, meaning each particle is updated
  * once, and the result is updated to match the resulting state of the swarm.
@@ -69,10 +69,10 @@ void
 cpso_step(struct cpso_result *g, void *buffer, struct cpso_config const *swarm);
 
 /* cpso_run() - Run multiple steps of the simulation.
- * g: Used to store the resulting vector and score of the swarm
- * buffer: Memory to store simulation state for cpso_step and cspo_run.
- * swarm: The swarm configuration dictating the details of the simulation.
- * steps: The number of rounds of particle updates to simulate
+ * - g: Used to store the resulting vector and score of the swarm
+ * - buffer: Memory to store simulation state for cpso_step and cspo_run.
+ * - swarm: The swarm configuration dictating the details of the simulation.
+ * - steps: The number of rounds of particle updates to simulate
  *
  * Simulate as many iterations as specified in steps. Equivalent to running
  * cpso_step in a loop for steps iterations.
@@ -81,7 +81,7 @@ void
 cpso_run(struct cpso_result *g, void *buffer, struct cpso_config const *swarm, size_t steps);
 
 /* cpso_rngU01() - The default RNG provided by cpso.
- * seed: Stateful seed that may be used and mutated by the RNG.
+ * - seed: Stateful seed that may be used and mutated by the RNG.
  *
  * Generate a number in the range [0.0, 1.0] in as uniform a distribution as
  * possible. Note, this RNG may not be perfectly evenly distributed, neither is
